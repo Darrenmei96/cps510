@@ -2,9 +2,9 @@
 --Create a table for the passenger entity
 create table Passenger(
     passportnumber varchar2(10) not null,
-    name varchar2(25) default 'Dee Falt' not null,
+    name varchar2(20) default 'Dee Falt' not null,
     birthdate date,
-    email varchar2(50) not null,
+    email varchar2(40) not null,
     phonenumber number default 14161234567,
     primary key (passportnumber)
 );
@@ -26,21 +26,21 @@ create table carries(
 --Create a table for the plane ticket entity
 create table PlaneTicket(
     ticketnumber number not null,
-    classtype varchar2(25) default 'Economy',
+    classtype varchar2(20) default 'Economy',
     seatnumber varchar2(3),
     primary key (ticketnumber)
 );
 
 --Create a table for the meal plan entity
 create table Mealplan(
-    mealPlanName varchar2(25),
+    mealPlanName varchar2(15),
     primary key (mealPlanName)
 );
 
 --Create a table for the adds on relationship
 create table addsOn(
 	ticketnumber number references planeticket(ticketnumber) on delete cascade,
-    mealplanname varchar2(25) references mealplan(mealplanname) on delete cascade,
+    mealplanname varchar2(15) references mealplan(mealplanname) on delete cascade,
     primary key (ticketnumber, mealplanname)
 );
 
@@ -69,7 +69,7 @@ create table confirms(
 --Create a table for the airplane entity
 create table Airplane(
     serialNumber number not null,
-    airplaneManufacturer varchar2(50),
+    airplaneManufacturer varchar2(40),
     seatLimit number,
     airplaneModel varchar2(20),
     primary key (serialNumber)
@@ -85,7 +85,7 @@ create table fliesWith(
 --Create a table for the employee entity
 create table Employee(
     EmployeeID number not null,
-    EmployeeName varchar2(25) not null,
+    EmployeeName varchar2(20) not null,
     primary key (EmployeeID)
 );
 
@@ -105,7 +105,7 @@ create table SecurityGuard(
 create table Airport(
     airportCode varchar2(4) not null,
     address varchar2(50),
-    airportName varchar2(50),
+    airportName varchar2(30),
     primary key (airportCode)
 );
 
