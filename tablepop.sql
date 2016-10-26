@@ -5,20 +5,15 @@ insert into Passenger values('C1234569','AMY SMITH','03-Jan-1985','abc@ryerson.c
 insert into Passenger values('D1234569','EDWARD TH','04-Feb-1965','abc@ryerson.ca',4189998394);
 insert into Passenger values('E1234569','BILL LO','15-Mar-2013','gro@ryerson.ca',6473859204);
 
-insert​ ​into​ ​Luggage​ ​values(21.22,1232434); 
-insert​ ​into​ ​Luggage​ ​values(10,123245); 
-insert​ ​into​ ​Luggage​ ​values(22.22,1232436); 
-insert​ ​into​ ​Luggage​ ​values(20.2,1232437); 
-insert​ ​into​ ​Luggage​ ​values(26.22,1232438);
+insert into Luggage values(19.8,1232434);
+insert into Luggage values(22,1232436);
+insert into Luggage values(20,1232437);
 
-insert​ ​into​ ​carries​ ​values(1232434,'A1234569'); 
-insert into carries values(123245, 'B1234569');
-insert into carries values(1232436, 'C1234569');
+insert into carries values(1232434,'A1234569'); 
+insert into carries values(1232436, 'B1234569');
 
 insert into PlaneTicket values(1234,'Economy','D12');
 insert into PlaneTicket values(1453,'Economy','A12');
-insert into PlaneTicket values(1334,'Economy','B12');
-insert into PlaneTicket values(1534,'Economy','C12');
 insert into PlaneTicket values(1233, 'First Class', 'A4');
 insert into PlaneTicket values(1232, 'Business', 'H5');
 
@@ -43,9 +38,7 @@ insert into confirms values(1506, 1234);
 
 insert into Airplane values(747,'Boeing Commercial Airplanes',200,'747SR-81');
 insert into Airplane values(777,'Airbus Groups',200,'747SR-81');
-insert into Airplane values(700,'Boeing Commercial Airplanes',200,'747SR-81');
-insert into Airplane values(741,'Airbus Groups',200,'747SR-81');
-insert into Airplane values(742,'Boeing Commercial Airplanes',200,'747SR-81');
+
 
 insert into fliesWith values(747,1506);
 
