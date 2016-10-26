@@ -105,7 +105,7 @@ create table SecurityGuard(
 create table Airport(
     airportCode varchar2(4) not null,
     address varchar2(50),
-    airportName varchar2(30),
+    airportName varchar2(50),
     primary key (airportCode)
 );
 
