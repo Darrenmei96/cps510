@@ -82,11 +82,41 @@ create table fliesWith(
     primary key (planeserial, flightnumber)
 );
 
+--Create a table for the airport entity
+create table Airport(
+    airportCode varchar2(4) not null,
+    address varchar2(40),
+    airportName varchar2(40),
+    primary key (airportCode)
+);
+
+/*
+Depreciated - merged into Employee
+--Create a table for the works at relationship
+create table worksAt(
+    employeeid number references Employee(employeeid) on delete cascade,
+    airportCode varchar(4) references Airport(airportCode) on delete cascade,
+    primary key (employeeid, airportCode)
+);
+*/
+
+
+/*
 --Create a table for the employee entity
 create table Employee(
     EmployeeID number not null,
     EmployeeName varchar2(20) not null,
     primary key (EmployeeID)
+);
+*/
+
+/* Depreciated tables
+--Merge the employee AND worksAt table
+create table Employee(
+    EmployeeID number not null,
+	airportCode varchar2(4) references Airport(airportcode) on delete cascade,
+    EmployeeName varchar2(20) not null,
+    primary key (EmployeeID, airportCode)
 );
 
 --Create a table for the ticket agent entity
@@ -100,34 +130,49 @@ create table SecurityGuard(
     EmployeeID number references Employee(EmployeeID) on delete cascade,
     assignedsector varchar2(8)
 );
+*/
 
---Create a table for the airport entity
-create table Airport(
-    airportCode varchar2(4) not null,
-    address varchar2(30),
-    airportName varchar2(30),
-    primary key (airportCode)
+--Merge the security guard and ticket tables
+create table SecurityGuardEmployee(
+	EmployeeID number not null,
+	airportCode varchar2(4) references Airport(airportcode) on delete cascade,
+    assignedsector varchar2(8),
+    EmployeeName varchar2(20) not null,
+    primary key (EmployeeID, airportCode)
 );
 
---Create a table for the works at relationship
-create table worksAt(
-    employeeid number references Employee(employeeid) on delete cascade,
-    airportCode varchar(4) references Airport(airportCode) on delete cascade,
-    primary key (employeeid, airportCode)
+create table TicketAgentEmployee(
+	EmployeeID number not null,
+	airportCode varchar2(4) references Airport(airportcode) on delete cascade,
+    AssignedBooth varchar2(10),
+    EmployeeName varchar2(20) not null,
+    primary key (EmployeeID, airportCode)
 );
 
+
+/*
+Depreciated - use fliesFromTo
 --Create a table for the destines at relationship
 create table destinesAt(
 	flightnumber number references flight(flightnumber) on delete cascade,
 	airportcode varchar2(4) references airport(airportcode) on delete cascade,
 	primary key (flightnumber, airportcode)
 ); 
-
+Depreciated - use fliesFromTo
 --Create a table for the originates from relationship
 create table originatesFrom(
 	flightnumber number references flight(flightnumber) on delete cascade,
 	airportcode varchar2(4) references airport(airportcode) on delete cascade,
 	primary key (flightnumber, airportcode)
+);
+*/
+
+--merge the destinesAt and originatesFrom tables
+create table fliesFromTo(
+	flightnumber number references flight(flightnumber) on delete cascade,
+	airportSRCcode varchar2(4) references airport(airportcode) on delete cascade,
+	airportDSTcode varchar2(4) references airport(airportcode) on delete cascade,
+	primary key(flightnumber, airportSRCcode, airportDSTcode)
 );
 
 --Create a table for the controls relationship
