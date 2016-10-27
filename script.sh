@@ -26,6 +26,10 @@ getinput () {
 			quit;
 EOF
 		sleep .5
+	elif [ "$input" == "4" ]; then
+		sqlplus64 "$sqlinfo"
+	elif [ "$input" == "5" ]; then
+		sqlplus64 "$sqlinfo" @advquery.sql
 	elif [ "$input" == "9" ]; then
 		deltables
 		sleep.5
@@ -62,7 +66,9 @@ main () {
 		echo "Here are the options currently implemented: "
 		echo "1: Create the sql tables"
 		echo "2: Populate the sql tables"
-		echo "3: Enter commands in the SQL environment"
+		echo "3: Enter commands into the SQL environment"
+		echo "4: Enter the SQL environment "
+		echo "5: Run the advanced queries "
 		echo " "
 		echo "9: Delete the sql table"
 		echo "E: Exit the shell script"
