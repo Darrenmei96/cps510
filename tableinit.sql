@@ -104,8 +104,8 @@ create table SecurityGuard(
 --Create a table for the airport entity
 create table Airport(
     airportCode varchar2(4) not null,
-    address varchar2(50),
-    airportName varchar2(50),
+    address varchar2(30),
+    airportName varchar2(30),
     primary key (airportCode)
 );
 
@@ -137,4 +137,4 @@ create table controls(
 	primary key (flightnumber, airportcode)
 );
 
-
+exit;

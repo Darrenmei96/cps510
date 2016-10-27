@@ -64,3 +64,4 @@ insert into originatesFrom values(1506, 'HND');
 
 insert into controls values(1506, 'YYZ');
 
+exit;

@@ -17,3 +17,5 @@ drop table originatesFrom;
 drop table controls;
 drop table airport;
 drop table flight;
+
+exit;
