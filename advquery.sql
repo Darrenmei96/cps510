@@ -33,3 +33,13 @@ and b.ticketnumber = pt.ticketnumber
 and b.passportnumber = p.passportnumber
 );
 
+
+select * 
+from passenger p 
+where exists (
+	select * 
+	from planeticket pt, books b
+	where pt.classtype = 'Economy'
+	and pt.ticketnumber = b.ticketnumber
+	and b.passportnumber = p.passportnumber
+);
