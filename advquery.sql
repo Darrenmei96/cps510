@@ -43,3 +43,5 @@ where exists (
 	and pt.ticketnumber = b.ticketnumber
 	and b.passportnumber = p.passportnumber
 );
+
+exit;
