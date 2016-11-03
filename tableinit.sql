@@ -133,22 +133,27 @@ create table SecurityGuard(
 */
 
 --Merge the security guard and ticket tables
+/*Depreciated
 create table SecurityGuardEmployee(
 	EmployeeID number not null,
 	airportCode varchar2(4) references Airport(airportcode) on delete cascade,
     assignedsector varchar2(8),
     EmployeeName varchar2(20) not null,
     primary key (EmployeeID, airportCode)
-);
+);*/
 
 create table TicketAgentEmployee(
 	EmployeeID number not null,
-	airportCode varchar2(4) references Airport(airportcode) on delete cascade,
     AssignedBooth varchar2(10),
     EmployeeName varchar2(20) not null,
-    primary key (EmployeeID, airportCode)
+    primary key (EmployeeID)
 );
 
+create table worksAt(
+    employeeid number references Employee(employeeid) on delete cascade,
+    airportCode varchar(4) references Airport(airportCode) on delete cascade,
+    primary key (employeeid, airportCode)
+);
 
 /*
 Depreciated - use fliesFromTo
