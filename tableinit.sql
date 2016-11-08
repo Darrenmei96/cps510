@@ -28,10 +28,11 @@ create table PlaneTicket(
     ticketnumber number not null,
     classtype varchar2(20) default 'Economy',
     seatnumber varchar2(3),
+	mealplan varhchar2(10) default 'Steak',
     primary key (ticketnumber)
 );
 
---Create a table for the meal plan entity
+/*--Create a table for the meal plan entity
 create table Mealplan(
     mealPlanName varchar2(15),
     primary key (mealPlanName)
@@ -42,7 +43,7 @@ create table addsOn(
 	ticketnumber number references planeticket(ticketnumber) on delete cascade,
     mealplanname varchar2(15) references mealplan(mealplanname) on delete cascade,
     primary key (ticketnumber, mealplanname)
-);
+);*/
 
 --Create a table for the books relationship
 create table books(
