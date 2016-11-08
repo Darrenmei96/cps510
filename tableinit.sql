@@ -1,12 +1,24 @@
+--Create a table for person entity
+create table Person(
+	name varchar2(20) default 'Dee Falt' not null,
+	email varchar2(40) not null,
+	phonenumber number default 14161234567,
+	primary key(name)
+);
 
---Create a table for the passenger entity
-create table Passenger(
+--Create a table for the passport entity
+create table Passport(
     passportnumber varchar2(10) not null,
-    name varchar2(20) default 'Dee Falt' not null,
+	name varchar2(20) references person(name),
     birthdate date,
-    email varchar2(40) not null,
-    phonenumber number default 14161234567,
     primary key (passportnumber)
+);
+
+--Create a table for a holds relationship
+create table holds(
+	name varchar(20) references person(name),
+	passportnumber varchar2(10) references passport(passportnumber),
+	primary key(name, passportnumber)
 );
 
 --Create a table for the luggage entity
@@ -19,8 +31,8 @@ create table Luggage(
 --Create a table for the carries relationship
 create table carries(
     luggageid number references Luggage(luggageid) on delete cascade,
-    passportnumber varchar2(10) references passenger(passportnumber),
-    primary key (luggageid, passportnumber)
+    name varchar(20) references person(name),
+    primary key (luggageid, name)
 );
 
 --Create a table for the plane ticket entity
@@ -28,11 +40,11 @@ create table PlaneTicket(
     ticketnumber number not null,
     classtype varchar2(20) default 'Economy',
     seatnumber varchar2(3),
-	mealplan varhchar2(10) default 'Steak',
+	mealplan varchar(10) default 'Steak',
     primary key (ticketnumber)
 );
-
-/*--Create a table for the meal plan entity
+ /* mealplan added as attribute to plane ticket
+--Create a table for the meal plan entity
 create table Mealplan(
     mealPlanName varchar2(15),
     primary key (mealPlanName)
@@ -43,13 +55,15 @@ create table addsOn(
 	ticketnumber number references planeticket(ticketnumber) on delete cascade,
     mealplanname varchar2(15) references mealplan(mealplanname) on delete cascade,
     primary key (ticketnumber, mealplanname)
-);*/
+);
+*/
 
 --Create a table for the books relationship
 create table books(
     ticketnumber number references PlaneTicket(ticketnumber) on delete cascade,
-    passportnumber varchar2(10) references passenger(passportnumber) on delete cascade,
-    primary key (ticketnumber, passportnumber)
+    --passportnumber varchar2(10) references passenger(passportnumber) on delete cascade,
+    name varchar2(20) references person(name),
+	primary key (ticketnumber, passportnumber)
 );
 
 --Create a table for the flight entity
@@ -72,16 +86,17 @@ create table Airplane(
     serialNumber number not null,
     airplaneManufacturer varchar2(40),
     seatLimit number,
-    airplaneModel varchar2(20),
+    --airplaneModel varchar2(20),
     primary key (serialNumber)
 );
 
+/*
 --Create a table for the flies with relationship
 create table fliesWith(
     planeserial number references Airplane(serialnumber) on delete cascade,
 	flightnumber number references Flight(flightnumber) on delete cascade,
     primary key (planeserial, flightnumber)
-);
+);*/
 
 --Create a table for the airport entity
 create table Airport(
