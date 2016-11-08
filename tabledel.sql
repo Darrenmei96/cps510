@@ -13,12 +13,16 @@ drop table mealplan;
 drop table planeticket;
 drop table carries;
 drop table luggage;
-drop table passenger;
+--drop table passenger;
 --drop table destinesAt;
 --drop table originatesFrom;
 drop table fliesFromTo;
 drop table controls;
 drop table airport;
 drop table flight;
+drop table holds;
+drop table person;
+drop table contactinfo;
+drop table passport;
 
 exit;
