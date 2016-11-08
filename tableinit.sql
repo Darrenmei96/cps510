@@ -1,37 +1,44 @@
+--Create a table for the contact info entity
+create table ContactInfo(
+	phone number default 14161234567,
+	email varchar2(40) default 'johnsmith@email.ca'
+	primary key (phone)
+);
+
 --Create a table for person entity
 create table Person(
-	name varchar2(20) default 'Dee Falt' not null,
-	email varchar2(40) not null,
-	phonenumber number default 14161234567,
-	primary key(name)
+	sin number default 111222333 not null,
+	name varchar2(20) default 'John Smith' not null,
+	birthdate date,
+	phone number references ContactInfo(phone) on delete cascade,
+	primary key (sin)
 );
 
 --Create a table for the passport entity
 create table Passport(
     passportnumber varchar2(10) not null,
-	name varchar2(20) references person(name),
-    birthdate date,
+	country varchar2(2) default 'CA' not null,
     primary key (passportnumber)
 );
 
 --Create a table for a holds relationship
 create table holds(
-	name varchar(20) references person(name),
-	passportnumber varchar2(10) references passport(passportnumber),
-	primary key(name, passportnumber)
+	sin number references person(sin) on delete cascade,
+	passportnumber varchar2(10) references passport(passportnumber) on delete cascade,
+	primary key(sin, passportnumber)
 );
 
 --Create a table for the luggage entity
 create table Luggage(
-    weight number default 23,
     luggageid number not null,
+	weight number default 23,
     primary key (luggageid)
 );
 
 --Create a table for the carries relationship
 create table carries(
     luggageid number references Luggage(luggageid) on delete cascade,
-    name varchar(20) references person(name),
+    sin number references person(sin),
     primary key (luggageid, name)
 );
 
@@ -43,26 +50,11 @@ create table PlaneTicket(
 	mealplan varchar(10) default 'Steak',
     primary key (ticketnumber)
 );
- /* mealplan added as attribute to plane ticket
---Create a table for the meal plan entity
-create table Mealplan(
-    mealPlanName varchar2(15),
-    primary key (mealPlanName)
-);
-
---Create a table for the adds on relationship
-create table addsOn(
-	ticketnumber number references planeticket(ticketnumber) on delete cascade,
-    mealplanname varchar2(15) references mealplan(mealplanname) on delete cascade,
-    primary key (ticketnumber, mealplanname)
-);
-*/
 
 --Create a table for the books relationship
 create table books(
     ticketnumber number references PlaneTicket(ticketnumber) on delete cascade,
-    --passportnumber varchar2(10) references passenger(passportnumber) on delete cascade,
-    name varchar2(20) references person(name),
+    passportnumber number references passport(passportnumber) on delete cascade,
 	primary key (ticketnumber, passportnumber)
 );
 
@@ -84,19 +76,18 @@ create table confirms(
 --Create a table for the airplane entity
 create table Airplane(
     serialNumber number not null,
-    airplaneManufacturer varchar2(40),
+    airplaneManufacturer varchar2(20),
     seatLimit number,
-    --airplaneModel varchar2(20),
     primary key (serialNumber)
 );
 
-/*
+
 --Create a table for the flies with relationship
 create table fliesWith(
     planeserial number references Airplane(serialnumber) on delete cascade,
 	flightnumber number references Flight(flightnumber) on delete cascade,
     primary key (planeserial, flightnumber)
-);*/
+);
 
 --Create a table for the airport entity
 create table Airport(
@@ -160,7 +151,6 @@ create table SecurityGuardEmployee(
 
 create table TicketAgentEmployee(
 	EmployeeID number not null,
-    AssignedBooth varchar2(10),
     EmployeeName varchar2(20) not null,
     primary key (EmployeeID)
 );
@@ -168,27 +158,11 @@ create table TicketAgentEmployee(
 create table worksAt(
     employeeid number references Employee(employeeid) on delete cascade,
     airportCode varchar(4) references Airport(airportCode) on delete cascade,
+	AssignedBooth varchar2(10),
     primary key (employeeid, airportCode)
 );
 
-/*
-Depreciated - use fliesFromTo
---Create a table for the destines at relationship
-create table destinesAt(
-	flightnumber number references flight(flightnumber) on delete cascade,
-	airportcode varchar2(4) references airport(airportcode) on delete cascade,
-	primary key (flightnumber, airportcode)
-); 
-Depreciated - use fliesFromTo
---Create a table for the originates from relationship
-create table originatesFrom(
-	flightnumber number references flight(flightnumber) on delete cascade,
-	airportcode varchar2(4) references airport(airportcode) on delete cascade,
-	primary key (flightnumber, airportcode)
-);
-*/
-
---merge the destinesAt and originatesFrom tables
+--Create a table for the flying relationships
 create table fliesFromTo(
 	flightnumber number references flight(flightnumber) on delete cascade,
 	airportSRCcode varchar2(4) references airport(airportcode) on delete cascade,
