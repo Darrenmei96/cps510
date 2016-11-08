@@ -1,7 +1,7 @@
 --Create a table for the contact info entity
 create table ContactInfo(
 	phone number default 14161234567,
-	email varchar2(40) default 'johnsmith@email.ca'
+	email varchar2(40) default 'johnsmith@email.ca',
 	primary key (phone)
 );
 
