@@ -39,7 +39,7 @@ create table Luggage(
 create table carries(
     luggageid number references Luggage(luggageid) on delete cascade,
     sin number references person(sin),
-    primary key (luggageid, name)
+    primary key (luggageid, sin)
 );
 
 --Create a table for the plane ticket entity
@@ -54,7 +54,7 @@ create table PlaneTicket(
 --Create a table for the books relationship
 create table books(
     ticketnumber number references PlaneTicket(ticketnumber) on delete cascade,
-    passportnumber number references passport(passportnumber) on delete cascade,
+    passportnumber varchar2(10) references Passport(passportnumber) on delete cascade,
 	primary key (ticketnumber, passportnumber)
 );
 
@@ -73,22 +73,6 @@ create table confirms(
     primary key(flightnumber, ticketnumber)
 );
 
---Create a table for the airplane entity
-create table Airplane(
-    serialNumber number not null,
-    airplaneManufacturer varchar2(20),
-    seatLimit number,
-    primary key (serialNumber)
-);
-
-
---Create a table for the flies with relationship
-create table fliesWith(
-    planeserial number references Airplane(serialnumber) on delete cascade,
-	flightnumber number references Flight(flightnumber) on delete cascade,
-    primary key (planeserial, flightnumber)
-);
-
 --Create a table for the airport entity
 create table Airport(
     airportCode varchar2(4) not null,
@@ -97,57 +81,13 @@ create table Airport(
     primary key (airportCode)
 );
 
-/*
-Depreciated - merged into Employee
---Create a table for the works at relationship
-create table worksAt(
-    employeeid number references Employee(employeeid) on delete cascade,
-    airportCode varchar(4) references Airport(airportCode) on delete cascade,
-    primary key (employeeid, airportCode)
+--Create a table for the airplane entity
+create table Airplane(
+    serialNumber number not null,
+    airplaneManufacturer varchar2(20),
+    seatLimit number,
+    primary key (serialNumber)
 );
-*/
-
-
-/*
---Create a table for the employee entity
-create table Employee(
-    EmployeeID number not null,
-    EmployeeName varchar2(20) not null,
-    primary key (EmployeeID)
-);
-*/
-
-/* Depreciated tables
---Merge the employee AND worksAt table
-create table Employee(
-    EmployeeID number not null,
-	airportCode varchar2(4) references Airport(airportcode) on delete cascade,
-    EmployeeName varchar2(20) not null,
-    primary key (EmployeeID, airportCode)
-);
-
---Create a table for the ticket agent entity
-create table TicketAgent(
-    EmployeeID number references Employee(EmployeeID) on delete cascade,
-    AssignedBooth varchar2(10)
-);
-
---Create a table for the security guard entity
-create table SecurityGuard(
-    EmployeeID number references Employee(EmployeeID) on delete cascade,
-    assignedsector varchar2(8)
-);
-*/
-
---Merge the security guard and ticket tables
-/*Depreciated
-create table SecurityGuardEmployee(
-	EmployeeID number not null,
-	airportCode varchar2(4) references Airport(airportcode) on delete cascade,
-    assignedsector varchar2(8),
-    EmployeeName varchar2(20) not null,
-    primary key (EmployeeID, airportCode)
-);*/
 
 create table TicketAgentEmployee(
 	EmployeeID number not null,
@@ -156,11 +96,19 @@ create table TicketAgentEmployee(
 );
 
 create table worksAt(
-    employeeid number references Employee(employeeid) on delete cascade,
+    employeeid number references TicketAgentEmployee(employeeid) on delete cascade,
     airportCode varchar(4) references Airport(airportCode) on delete cascade,
 	AssignedBooth varchar2(10),
     primary key (employeeid, airportCode)
 );
+
+--Create a table for the flies with relationship
+create table fliesWith(
+    serialnumber number references Airplane(serialnumber) on delete cascade,
+	flightnumber number references Flight(flightnumber) on delete cascade,
+    primary key (serialnumber, flightnumber)
+);
+
 
 --Create a table for the flying relationships
 create table fliesFromTo(
