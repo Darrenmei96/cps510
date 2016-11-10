@@ -1,16 +1,18 @@
+/*
 --Create a table for the contact info entity
 create table ContactInfo(
 	phone number default 14161234567,
 	email varchar2(40) default 'johnsmith@email.ca',
 	primary key (phone)
-);
+);*/
 
 --Create a table for person entity
 create table Person(
 	sin number default 111222333 not null,
 	name varchar2(20) default 'John Smith' not null,
 	birthdate date,
-	phone number references ContactInfo(phone) on delete cascade,
+	phone number default 14161234567,
+	email varchar2(40) default 'johnsmith@email.ca',
 	primary key (sin)
 );
 

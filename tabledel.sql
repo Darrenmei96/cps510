@@ -12,8 +12,8 @@ drop table luggage purge;
 drop table holds purge;
 drop table passport purge;
 drop table person purge;
-drop table contactinfo purge;
 drop table airplane purge;
 drop table flight purge;
+--drop table contactinfo purge;
 
 exit;
