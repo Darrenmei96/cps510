@@ -18,9 +18,9 @@ insert into Luggage values(1232434,19.8);
 insert into Luggage values(1232436,22);
 insert into Luggage values(1232437,20);
 
-insert into carries values('A1234569',1232434);
-insert into carries values('B1234569',1232436);
-insert into carries values('C1234569',1232437);
+insert into carries values(123456,1232434);
+insert into carries values(223456,1232436);
+insert into carries values(323456,1232437);
 
 insert into PlaneTicket values(1234,'Economy','D12','Vegan');
 insert into PlaneTicket values(1233,'First Class','A4','Asian');
@@ -40,8 +40,8 @@ insert into confirms values(1232,4321);
 insert into Airport values('YYZ','6301 Silver Dart Dr','Toronto Pearson International Airport');
 insert into Airport values('HND','Hanedakuko, Ota, Tokyo 144-0041','Tokyo International Airport');
 
-insert into Airplane values(74701,'Boeing Commercial Airplanes',200);
-insert into Airplane values(77701,'Airbus Groups',200);
+insert into Airplane values('747-01','Boeing',200);
+insert into Airplane values('A380-01','Airbus',200);
 
 insert into TicketAgentEmployee values(55555,'John Smith');
 insert into TicketAgentEmployee values(88888,'Akane Miyoshi');
@@ -49,8 +49,8 @@ insert into TicketAgentEmployee values(88888,'Akane Miyoshi');
 insert into worksAt values(55555,'YYZ','Booth 6');
 insert into worksAt values(88888,'HND','Booth 14');
 
-insert into fliesWith values(77701,1234);
-insert into fliesWith values(74701,4321);
+insert into fliesWith values('747-01',1234);
+insert into fliesWith values('A380-01',4321);
 
 insert into fliesFromTo values(4321,'YYZ','HND');
 insert into fliesFromTo values(1234,'HND','YYZ');

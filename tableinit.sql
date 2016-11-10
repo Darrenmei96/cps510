@@ -83,7 +83,7 @@ create table Airport(
 
 --Create a table for the airplane entity
 create table Airplane(
-	serialNumber number not null,
+	serialNumber varchar2(10) not null,
 	airplaneManufacturer varchar2(20),
 	seatLimit number,
 	primary key (serialNumber)
@@ -104,7 +104,7 @@ create table worksAt(
 
 --Create a table for the flies with relationship
 create table fliesWith(
-	serialnumber number references Airplane(serialnumber) on delete cascade,
+	serialnumber varchar2(10) references Airplane(serialnumber) on delete cascade,
 	flightnumber number references Flight(flightnumber) on delete cascade,
 	primary key (serialnumber, flightnumber)
 );
