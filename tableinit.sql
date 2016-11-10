@@ -32,10 +32,11 @@ create table Passport(
 );
 
 --Create a table for a holds relationship
---1-1 relation, so no fds
+--1-1 relation, sin <-> passportnumber
 create table holds(
 	sin number references person(sin) on delete cascade,
-	passportnumber varchar2(10) references passport(passportnumber) on delete cascade
+	passportnumber varchar2(10) references passport(passportnumber) on delete cascade,
+	primary key (sin,passportnumber)
 );
 
 --Create a table for the luggage entity
@@ -50,7 +51,7 @@ create table Luggage(
 );
 
 --Create a table for the carries relationship
---1-1 relationship, so no fds
+--1-1 relationship, sin <-> luggageid
 create table carries(
 	sin number references person(sin) on delete cascade,
 	luggageid number references Luggage(luggageid) on delete cascade,
@@ -71,10 +72,11 @@ create table PlaneTicket(
 );
 
 --Create a table for the books relationship
---1-1 relationship, so no fds
+--1-1 relationship, passportnumber <-> ticketnumber
 create table books(
 	passportnumber varchar2(10) references Passport(passportnumber) on delete cascade,
-	ticketnumber number references PlaneTicket(ticketnumber) on delete cascade
+	ticketnumber number references PlaneTicket(ticketnumber) on delete cascade,
+	primary key(passportnumber, ticketnumber)
 );
 
 
@@ -148,10 +150,11 @@ create table worksAt(
 );
 
 --Create a table for the flies with relationship
---1-1 relationship, so no FDs
+--1-1 relationship, serialnumber <-> flightnumber
 create table fliesWith(
 	serialnumber varchar2(10) references Airplane(serialnumber) on delete cascade,
-	flightnumber number references Flight(flightnumber) on delete cascade
+	flightnumber number references Flight(flightnumber) on delete cascade,
+	primary key (serialnumber, flightnumber)
 );
 
 
