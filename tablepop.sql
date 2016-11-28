@@ -1,6 +1,7 @@
 insert into Person values(123456,'DARREN MEI','30-Jan-1996',4161112222,'darren.mei@ryerson.ca');
 insert into Person values(223456,'SHENLEY RODWORTH','01-APRIL-1990',2890101011,'abc@ryerson.ca');
 insert into Person values(323456,'BOBBY GREY','20-DEC-2000',6470038032,'abcdefg@ryerson.ca');
+insert into Person values(323457,'TONY GREY','20-Dec-2013',6470038032,'abcdefg@ryerson.ca');
 
 insert into Passport values('A1234569','CA');
 insert into Passport values('B1234569','US');
